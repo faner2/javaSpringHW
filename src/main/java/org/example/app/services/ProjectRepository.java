@@ -5,6 +5,7 @@ import org.example.web.dto.Book;
 import java.util.List;
 
 public interface ProjectRepository<T> {
+    //FIXME орфографическая ошибка
     List<T> retreiveAll();
 
     void store(T book);

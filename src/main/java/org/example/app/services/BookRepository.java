@@ -16,6 +16,7 @@ public class BookRepository implements ProjectRepository<Book> {
     private final List<Book> repoCopy = new ArrayList<>();
 
     @Override
+    //FIXME орфографическая ошибка
     public List<Book> retreiveAll() {
 
         return new ArrayList<>(repo);

@@ -8,14 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.WebParam;
 import java.util.List;
 
 
 @Controller
 @RequestMapping(value = "books")
 public class BookShelfController {
-
+    //FIXME final
     private Logger logger = Logger.getLogger(BookShelfController.class);
     private BookService bookService;
 
@@ -25,7 +24,7 @@ public class BookShelfController {
     }
 
     @GetMapping("/shelf")
-    public String books(Model model){
+    public String books(Model model) {
         logger.info("got book shelf");
         model.addAttribute("book", new Book());
         model.addAttribute("bookList", bookService.getAllBooks());
@@ -33,7 +32,7 @@ public class BookShelfController {
     }
 
     @PostMapping("/save")
-    public String saveBook(Book book){
+    public String saveBook(Book book) {
         bookService.saveBook(book);
         logger.info("current repository size: " + bookService.getAllBooks().size());
         return "redirect:/books/shelf";
@@ -65,7 +64,7 @@ public class BookShelfController {
             return "redirect:/books/shelf";
         }
     }
-
+//FIXME удалить комментарии
    /*@PostMapping("/findAllAuthors")
     public String findBookAuthors(@RequestParam(value = "bookAuthorToFind") String bookAuthorToFind) {
         bookService.findBookByAuthor(bookAuthorToFind);
