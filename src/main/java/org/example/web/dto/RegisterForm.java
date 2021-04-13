@@ -9,6 +9,7 @@ public class RegisterForm {
     private String male;
 
     public RegisterForm() {
+        //FIXME o_O зачем этот код? Прочитай про конструктор по умолчанию
         this.firstName = firstName;
         this.secondName = secondName;
         this.username = username;
