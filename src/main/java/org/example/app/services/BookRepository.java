@@ -16,8 +16,7 @@ public class BookRepository implements ProjectRepository<Book> {
     private final List<Book> repoCopy = new ArrayList<>();
 
     @Override
-    //FIXME орфографическая ошибка
-    public List<Book> retreiveAll() {
+    public List<Book> retrieveAll() {
 
         return new ArrayList<>(repo);
     }
@@ -34,7 +33,7 @@ public class BookRepository implements ProjectRepository<Book> {
 
     @Override
     public boolean removeItemById(Integer bookIdToRemove) {
-        for (Book book : retreiveAll()) {
+        for (Book book : retrieveAll()) {
             if (book.getId().equals(bookIdToRemove)) {
                 logger.info("remove book completed: " + book);
                 return repo.remove(book);
@@ -46,7 +45,7 @@ public class BookRepository implements ProjectRepository<Book> {
     @Override
     public boolean removeItemByAuthor(String bookAuthorToRemove) { // метод удаления всех книг по автору
         boolean found = false;
-        for (Book book : retreiveAll()){
+        for (Book book : retrieveAll()){
             if (book.getAuthor().equals(bookAuthorToRemove)){
                 logger.info("remove book completed " + book);
                 repo.remove(book);
@@ -61,7 +60,7 @@ public class BookRepository implements ProjectRepository<Book> {
     @Override
     public boolean removeItemByTitle(String bookTitleToRemove) { // метод удаления всех книг по названию
         boolean found = false;
-        for (Book book : retreiveAll()){
+        for (Book book : retrieveAll()){
             if (book.getTitle().equals(bookTitleToRemove)){
                 logger.info("remove book completed " + book);
                 repo.remove(book);
@@ -76,7 +75,7 @@ public class BookRepository implements ProjectRepository<Book> {
     @Override
     public boolean removeItemBySize(Integer bookSizeToRemove) { // метод удаления всех книг по размеру
         boolean found = false;
-        for (Book book : retreiveAll()){
+        for (Book book : retrieveAll()){
             if (book.getSize() == bookSizeToRemove){
                 logger.info("remove book completed " + book);
                 repo.remove(book);
@@ -98,12 +97,12 @@ public class BookRepository implements ProjectRepository<Book> {
             repoCopy.clear();
         }
         if (criteria == null || name == null) {
-            retreiveAll();
+            retrieveAll();
         }
         else {
             switch (criteria) {
                 case "authors" : {
-                    for (Book book : retreiveAll()){
+                    for (Book book : retrieveAll()){
                         repoCopy.add(book);
                         if (!book.getAuthor().equals(name)){
                             repo.remove(book); // фильтрация книг происходит путем удаления ненужных из repo
@@ -113,7 +112,7 @@ public class BookRepository implements ProjectRepository<Book> {
                 }
 
                 case "titles" : {
-                    for (Book book : retreiveAll()){
+                    for (Book book : retrieveAll()){
                         repoCopy.add(book);
                         if (!book.getTitle().equals(name)){
                             repo.remove(book); // фильтрация книг происходит путем удаления ненужных из repo
@@ -123,7 +122,7 @@ public class BookRepository implements ProjectRepository<Book> {
                 }
 
                 case "pages" : {
-                    for (Book book : retreiveAll()){
+                    for (Book book : retrieveAll()){
                         repoCopy.add(book);
                         logger.info(book.getSize() + "-" + name + "-");
                         if (book.getSize() != Integer.parseInt(name)){

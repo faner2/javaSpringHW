@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
-//FIXME final
-    private Logger logger = Logger.getLogger(LoginController.class);
+
+    private final Logger logger = Logger.getLogger(LoginController.class);
     private LoginService loginService;
 
     @Autowired
