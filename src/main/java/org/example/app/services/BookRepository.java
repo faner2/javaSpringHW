@@ -22,16 +22,24 @@ public class BookRepository implements ProjectRepository<Book> {
     }
 
 
+
     @Override
     public void store(Book book) {
         book.setId(book.hashCode());
-        if (book.getAuthor().length() > 0 || book.getTitle().length() > 0 || book.getSize() != null){
-            logger.info("store new book : " + book);
-            repo.add(book);
+        logger.info("store new book : " + book);
+        repo.add(book);
+    }
+
+
+    @Override
+    public boolean removeItemById(Integer bookIdToRemove) {
+        for (Book book : retreiveAll()) {
+            if (book.getId().equals(bookIdToRemove)) {
+                logger.info("remove book completed: " + book);
+                return repo.remove(book);
+            }
         }
-        else logger.info("info about book is not filled : " + book);
-
-
+        return false;
     }
 
     @Override
