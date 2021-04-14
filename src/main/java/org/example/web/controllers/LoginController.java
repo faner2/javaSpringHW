@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+//FIXME удалите не нужные импорты
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
     private final Logger logger = Logger.getLogger(LoginController.class);
+    //FIXME final
     private LoginService loginService;
 
     @Autowired
@@ -35,6 +37,7 @@ public class LoginController {
     @PostMapping(value = "/login/register")
     public String register(RegisterForm regForm){
         logger.info("REG");
+        //FIXME если не нужно не удалите
         //model.addAttribute("loginForm", new LoginForm());
         loginService.addUser(regForm);
         return "redirect:/login";

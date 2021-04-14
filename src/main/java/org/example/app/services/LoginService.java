@@ -10,6 +10,7 @@ import java.util.ArrayList;
 @Service
 public class LoginService {
     private final Logger logger = Logger.getLogger(LoginService.class);
+    //FIXME final
     private ArrayList<RegisterForm> users = new ArrayList<RegisterForm>();
 
     public void addUser(RegisterForm regForm) {
