@@ -18,8 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
     private final Logger logger = Logger.getLogger(LoginController.class);
-    //FIXME final
-    private LoginService loginService;
+    private final LoginService loginService;
 
     @Autowired
     public LoginController(LoginService loginService) {
@@ -37,12 +36,9 @@ public class LoginController {
     @PostMapping(value = "/login/register")
     public String register(RegisterForm regForm){
         logger.info("REG");
-        //FIXME если не нужно не удалите
-        //model.addAttribute("loginForm", new LoginForm());
         loginService.addUser(regForm);
         return "redirect:/login";
     }
-
 
     @PostMapping(value = "/login/enter")
     public String authenticate(LoginForm loginForm){

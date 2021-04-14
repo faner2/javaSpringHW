@@ -21,6 +21,12 @@ public class BookService {
         return bookRepo.retrieveAll();
     }
 
+    public boolean checkBook(Book book){ // проверка книги на заполненность полей
+        if (book.getAuthor().length() > 0 || book.getTitle().length() > 0 || book.getSize() != null){
+            return true;
+        }
+        else return false;
+    }
 
     public void saveBook(Book book) {
         bookRepo.store(book);

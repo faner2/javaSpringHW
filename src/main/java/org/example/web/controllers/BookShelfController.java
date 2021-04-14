@@ -7,16 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-//FIXME удалите не нужные импорты
-import javax.jws.WebParam;
-import java.util.List;
 
 
 @Controller
 @RequestMapping(value = "books")
 public class BookShelfController {
-    //FIXME final
-    private Logger logger = Logger.getLogger(BookShelfController.class);
+    private final Logger logger = Logger.getLogger(BookShelfController.class);
     private BookService bookService;
 
     @Autowired
@@ -34,8 +30,7 @@ public class BookShelfController {
 
     @PostMapping("/save")
     public String saveBook(Book book){
-        //FIXME проверку вынесите в отдельный метод в сервисе, котоырй возращает boolean, здесь вызывайте его
-        if (book.getAuthor().length() > 0 || book.getTitle().length() > 0 || book.getSize() != null){
+        if (bookService.checkBook(book)){
             bookService.saveBook(book);
             logger.info("current repository size: " + bookService.getAllBooks().size());
             return "redirect:/books/shelf";
@@ -48,18 +43,19 @@ public class BookShelfController {
 
     @PostMapping("/removeAllAuthors")
     public String removeBookAuthors(@RequestParam(value = "bookAuthorToRemove") String bookAuthorToRemove) {
-        //FIXME if не начто не влияет, используйте логгер для логики
         if (bookService.removeBookByAuthor(bookAuthorToRemove)) {
+            logger.info("current repository size: " + bookService.getAllBooks().size());
             return "redirect:/books/shelf";
         } else {
+            logger.info("incorrect Book ID to remove");
             return "redirect:/books/shelf";
         }
     }
 
     @PostMapping("/remove")
     public String removeBook(@RequestParam(value = "bookIdToRemove") Integer bookIdToRemove) {
-        //FIXME if не начто не влияет, используйте логгер для логики
         if (bookService.removeBookById(bookIdToRemove)) {
+            logger.info("current repository size: " + bookService.getAllBooks().size());
             return "redirect:/books/shelf";
         } else {
             logger.info("incorrect ID to remove");
@@ -69,29 +65,25 @@ public class BookShelfController {
 
     @PostMapping("/removeAllTitles")
     public String removeBookTitles(@RequestParam(value = "bookTitleToRemove") String bookTitleToRemove) {
-        //FIXME if не начто не влияет, используйте логгер для логики
         if (bookService.removeBookByTitle(bookTitleToRemove)) {
+            logger.info("current repository size: " + bookService.getAllBooks().size());
             return "redirect:/books/shelf";
         } else {
+            logger.info("incorrect Book title to remove");
             return "redirect:/books/shelf";
         }
     }
 
     @PostMapping("/removeAllSizes")
     public String removeBookSizes(@RequestParam(value = "bookSizeToRemove") Integer bookSizeToRemove) {
-        //FIXME if не начто не влияет, используйте логгер для логики
         if (bookService.removeBookBySize(bookSizeToRemove)) {
+            logger.info("current repository size: " + bookService.getAllBooks().size());
             return "redirect:/books/shelf";
         } else {
+            logger.info("incorrect Book size to remove");
             return "redirect:/books/shelf";
         }
     }
-//FIXME если не нужно удалите
-   /*@PostMapping("/findAllAuthors")
-    public String findBookAuthors(@RequestParam(value = "bookAuthorToFind") String bookAuthorToFind) {
-        bookService.findBookByAuthor(bookAuthorToFind);
-        return "redirect:/books/shelf";
-    }*/
 
     @PostMapping("/findAllBooks")
     public String findBookTitles(@RequestParam(required = false, value = "criteria") String criteria,

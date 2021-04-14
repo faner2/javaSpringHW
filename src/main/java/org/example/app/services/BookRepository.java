@@ -3,8 +3,6 @@ package org.example.app.services;
 import org.apache.log4j.Logger;
 import org.example.web.dto.Book;
 import org.springframework.stereotype.Repository;
-//FIXME удалите не нужные импорты
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,15 +19,12 @@ public class BookRepository implements ProjectRepository<Book> {
         return new ArrayList<>(repo);
     }
 
-
-
     @Override
     public void store(Book book) {
         book.setId(book.hashCode());
         logger.info("store new book : " + book);
         repo.add(book);
     }
-
 
     @Override
     public boolean removeItemById(Integer bookIdToRemove) {
@@ -133,8 +128,5 @@ public class BookRepository implements ProjectRepository<Book> {
                 }
             }
         }
-
-
-
     }
 }
